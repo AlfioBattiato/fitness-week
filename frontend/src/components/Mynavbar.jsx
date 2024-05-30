@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function Mynavbar() {
     return (<>
 
@@ -10,7 +12,7 @@ function Mynavbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
+                        <Link to={`/`} className="nav-link">Home</Link>
                         </li>
 
 
@@ -30,8 +32,11 @@ function Mynavbar() {
                     </form>
 
 
+                    <Link to={`/Login`} className="nav-link ms-2">Login</Link>
+
                     {/* dropdown */}
-                    <ul className="navbar-nav  mb-2 mb-lg-0">
+                    {/* se se loggato */}
+                    {/* <ul className="navbar-nav  mb-2 mb-lg-0">
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Login
@@ -43,7 +48,7 @@ function Mynavbar() {
                                 <li><a className="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
             </div>
         </nav>

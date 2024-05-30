@@ -7,14 +7,15 @@ const Detail = () => {
 
 
     useEffect(() => {
-        fetch(`api/v1/courses/${id}`)
+        fetch(`/api/v1/courses/${id}`)
             .then((res) => res.json())
             .then((data) => {
-                setCourse(data)
+                setCourse(data.data)
                 console.log(data)
             }
             );
-    }, [course,id]);
+
+    }, [id]);
 
     return (
         <>
@@ -34,7 +35,6 @@ const Detail = () => {
                                <p className="card-text d-flex fw-bold mb-1">Start at: <span class="badge text-bg-dark ms-auto">{course.slot.start}</span></p>
                                <p className="card-text d-flex fw-bold mb-3">End at: <span class="badge text-bg-dark ms-auto">{course.slot.end}</span></p>
                               <div className="d-flex">
-                              <Link to={`/courses/${course.id}`} className="btn btn-secondary ">Dettagli</Link>
                              
                               </div>
 

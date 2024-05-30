@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from 'axios';
 import { LOGIN } from '../redux/actions'
+import { Link } from "react-router-dom";
 
 function Login() {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function Login() {
             .then(() => axios.post('/login', formData))
             .then(() => axios.get('/api/user'))
             .then((res) => {
+                console.log(res)
                 // salvare i dati dello user nel Redux state
                 dispatch({
                     type: LOGIN,
@@ -35,6 +37,8 @@ function Login() {
     };
 
     return (
+        <>
+        
         <form onSubmit={(ev) => submitLogin(ev)} noValidate>
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -49,6 +53,7 @@ function Login() {
                     value={formData.email}
                 />
             </div>
+
             <div className="mb-3">
                 <label htmlFor="password" className="form-label">
                     Password
@@ -67,6 +72,9 @@ function Login() {
                 Login
             </button>
         </form>
+        <Link to={`/Register/`} className=" fw-bold txt-primary mt-5">Non sei registrato?</Link>
+
+        </>
     )
 }
 export default Login

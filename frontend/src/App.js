@@ -4,12 +4,16 @@ import Mynavbar from './components/Mynavbar';
 import Homepage from './components/Homepage';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import Register from './components/Register';
 import { useSelector } from 'react-redux';
 import Detail from './components/Detail';
+import axios from 'axios';
+
 
 function App() {
     const user = useSelector((state) => state.user);
-
+    axios.defaults.withCredentials = true;
+    axios.defaults.withXSRFToken = true;
 
   return (
     <BrowserRouter>
@@ -18,6 +22,11 @@ function App() {
         <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/detail/:id" element={<Detail />} />
+
+
+
+            <Route path="/Login/" element={<Login />} />
+            <Route path="/Register/" element={<Register />} />
 
 
             

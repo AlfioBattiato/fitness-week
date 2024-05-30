@@ -13,7 +13,7 @@ Route::name('api.v1.') // prefissa il nome della rotta è come se scriviamo: ...
     // ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-        Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');//henry ? wth
+        Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');//henry ? wth
       
   
     });
