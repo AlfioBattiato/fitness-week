@@ -37,9 +37,17 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show($id)
     {
-        //
+        $course = Course::with('slot', 'activity')->find($id);
+        if (!$course) {
+            return response(['message' => 'Not found'], 404);
+        }
+        // return view('faculties.show', ['faculty' => $faculty]);
+        return [
+            'success' => true,
+            'data' => $course
+        ];
     }
 
     /**

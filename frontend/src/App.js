@@ -5,6 +5,7 @@ import Homepage from './components/Homepage';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import { useSelector } from 'react-redux';
+import Detail from './components/Detail';
 
 function App() {
     const user = useSelector((state) => state.user);
@@ -16,6 +17,7 @@ function App() {
     <div className="container">
         <Routes>
             <Route path="/" element={<Homepage />} />
+            <Route path="/detail/:id" element={<Detail />} />
 
 
             
