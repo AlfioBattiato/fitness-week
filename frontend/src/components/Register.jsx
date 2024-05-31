@@ -2,9 +2,11 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { LOGIN } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const dispatch = useDispatch();
+    const navigate=useNavigate()
 
     const [profileImage, setProfileImage] = useState(null);
     const [formData, setFormData] = useState({
@@ -43,12 +45,15 @@ const Register = () => {
                     'password_confirmation',
                     formData.password_confirmation
                 );
-                body.append('profile_img', profileImage); // TODO: verify this
+                if(profileImage){
+                    body.append('profile_img', profileImage)
+                }
+                 
                 return axios.post('/register', body);
             })
             .then(() => axios.get('/api/user'))
             .then((res) => {
-                // salvare i dati dello user nel Redux state
+                navigate('/')
                 dispatch({
                     type: LOGIN,
                     payload: res.data,

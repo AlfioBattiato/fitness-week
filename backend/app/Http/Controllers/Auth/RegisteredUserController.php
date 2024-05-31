@@ -24,11 +24,16 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()->min(4)],
             'profile_img' => ['nullable', 'image', 'max:1024'], // size in kilobytes
 
         ]);
-        $file_path = $request['profile_img'] ? Storage::put('/profiles', $request['profile_img']) : null; // usa lo storage di default
+
+        // $file_path = $request->hasFile('profile_img')  ? $request->file('profile_img')->store('profiles', 'public') : 'profiles/Missing_photo.svg';METODO A
+        // $file_path = $request['profile_img'] ? Storage::put('/profiles', $request['profile_img']) : 'profiles/Missing_photo.svg'; // usa lo storage di default METODO B
+
+        $file_path = $request['profile_img'] ? $request->file('profile_img')->store('profiles', 'public') : 'profiles/Missing_photo.svg';
+
 
         $data = $request->all();
         $user = new User();
@@ -55,5 +60,37 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return response()->noContent();
+    }
+
+
+    public function show($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response(['message' => 'Not found'], 404);
+        }
+        // return view('faculties.show', ['faculty' => $faculty]);
+        return [
+            'success' => true,
+            'data' => $user
+        ];
+    }
+
+    public function edit($id)
+    {
+       
+    }
+
+    public function Update($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response(['message' => 'Not found'], 404);
+        }
+       
+        return [
+            'success' => true,
+            'data' => $user
+        ];
     }
 }

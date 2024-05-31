@@ -20,11 +20,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'a@a.a',
             'role' => 'admin',
+            'profile_img' => '/storage/profiles/Missing_photo.svg',
         ]);
         User::factory()->create([
             'name' => 'guest',
             'email' => 'g@g.g',
             'role' => 'guest',
+            'profile_img' => '/storage/profiles/Missing_photo.svg',
+
         ]);
 
 

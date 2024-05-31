@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\CourseController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,8 @@ Route::name('api.v1.') // prefissa il nome della rotta è come se scriviamo: ...
     // ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-        Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');//henry ? wth
+        Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');
+        Route::get('/users/{id}', [RegisteredUserController::class, 'show'])->name('users.show');
       
   
     });

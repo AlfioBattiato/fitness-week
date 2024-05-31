@@ -17,7 +17,7 @@ const Homepage = () => {
     return (
         <>
             <h1>Courses</h1>
-            <div className="row mt-5">
+            <div className="row gy-4 mt-5">
                 {courses.map((course) => (
                     <div className="col-6 col-md-4 col-lg-3" key={course.id}>
                         <div className="card  border border-1"

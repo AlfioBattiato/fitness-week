@@ -4,12 +4,17 @@ import Mynavbar from './components/Mynavbar';
 import Homepage from './components/Homepage';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import Backoffice from './components/Backoffice';
 import Register from './components/Register';
 import { useDispatch, useSelector } from 'react-redux';
 import Detail from './components/Detail';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { LOGIN } from './redux/actions';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import CorsiUtente from './components/CorsiUtente';
+import Dashbord from './components/Dashbord';
+import PasswordReset from './components/PasswordReset';
 
 
 function App() {
@@ -32,26 +37,38 @@ function App() {
             .catch((err) => console.log(err))
             .finally(() => setLoaded(true));
 
-            
+
     }, [dispatch]);
+    
+    return (
+        loaded&&
+        <BrowserRouter>
+            <Mynavbar />
+            <div className="container">
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/Login/" element={<Login />} />
+                    <Route element={<ProtectedRoutes />}>
+                    <Route
+                        path="/password-reset/:token" element={<PasswordReset />}
+                    />
+                        <Route
+                            path="/corsiutente/:id" element={<CorsiUtente />}
+                        />
+                        <Route
+                            path="/dashbord/:id" element={<Dashbord />}
+                        />
+
+                    </Route>
 
 
-  return (
-    <BrowserRouter>
-    <Mynavbar />
-    <div className="container">
-        <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/Register/" element={<Register />} />
+                    <Route path="/backoffice/" element={<Backoffice />} />
 
 
 
-            <Route path="/Login/" element={<Login />} />
-            <Route path="/Register/" element={<Register />} />
-
-
-            
-            {/* {user=== null &&(
+                    {/* {user=== null &&(
                 <Route path="/" element={<Login />} />
 
             )} */}
@@ -60,10 +77,10 @@ function App() {
 
 
 
-            {/* rotte accessibili da tutti */}
+                    {/* rotte accessibili da tutti */}
 
-            {/* rotte accessibili solo se sei loggato */}
-            {/* <Route element={<ProtectedRoutes />}>
+                    {/* rotte accessibili solo se sei loggato */}
+                    {/* <Route element={<ProtectedRoutes />}>
                 <Route
                     path="/faculties/:id"
                     element={<FacultyPage />}
@@ -74,17 +91,17 @@ function App() {
                 />
             </Route> */}
 
-            {/* rotte accessibili solo se NON sei loggato */}
+                    {/* rotte accessibili solo se NON sei loggato */}
 
 
-            {/* <Route path="/404" element={<NotFound />} />
+                    {/* <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" />} /> */}
-        </Routes>
-    </div>
+                </Routes>
+            </div>
 
-    <Footer />
-</BrowserRouter>
-  );
+            <Footer />
+        </BrowserRouter>
+    );
 }
 
 export default App;
