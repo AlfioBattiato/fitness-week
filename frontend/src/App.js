@@ -5,15 +5,36 @@ import Homepage from './components/Homepage';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Register from './components/Register';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Detail from './components/Detail';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { LOGIN } from './redux/actions';
 
 
 function App() {
     const user = useSelector((state) => state.user);
     axios.defaults.withCredentials = true;
     axios.defaults.withXSRFToken = true;
+
+
+    const dispatch = useDispatch();
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        axios('/api/user')
+            .then((res) =>
+                dispatch({
+                    type: LOGIN,
+                    payload: res.data,
+                })
+            )
+            .catch((err) => console.log(err))
+            .finally(() => setLoaded(true));
+
+            
+    }, [dispatch]);
+
 
   return (
     <BrowserRouter>

@@ -9,7 +9,7 @@ const Homepage = () => {
             .then((res) => res.json())
             .then((data) => {
                 setCourses(data)
-                console.log(data)
+                // console.log(data)
             }
             );
     }, []);
