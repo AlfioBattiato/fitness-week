@@ -44,7 +44,7 @@ function App() {
         loaded&&
         <BrowserRouter>
             <Mynavbar />
-            <div className="container">
+            <div className="">
                 <Routes>
                     <Route path="/" element={<Homepage />} />
                     <Route path="/detail/:id" element={<Detail />} />
