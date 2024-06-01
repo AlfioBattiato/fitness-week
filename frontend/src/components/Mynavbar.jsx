@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { LOGOUT } from '../redux/actions';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { IoIosSettings, IoMdHome,IoIosFitness    } from "react-icons/io";
-import { RiLogoutBoxLine ,RiAdminFill} from "react-icons/ri";
+import { IoIosSettings, IoMdHome, IoIosFitness } from "react-icons/io";
+import { RiLogoutBoxLine, RiAdminFill } from "react-icons/ri";
 import { MdOutlineContactSupport } from "react-icons/md";
 
 function Mynavbar() {
@@ -44,7 +44,7 @@ function Mynavbar() {
     return (
         <>
 
-            <nav className={` navbar navbar-expand-lg ${location.pathname === '/' ? 'bg-nav' : ''}  ${isScrolled ? 'bg-black' : ''}`}>
+            <nav className={` navbar navbar-expand-lg bg-nav`}>
 
 
 
@@ -56,7 +56,7 @@ function Mynavbar() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                            
+
                                 <Link to="/" className={`nav-link  d-flex align-items-center gap-1  text-secondary ${location.pathname === '/' ? 'bord-p ' : ''} `}><IoMdHome />Home</Link>
                             </li>
                             <li className="nav-item">
@@ -65,26 +65,27 @@ function Mynavbar() {
                             {user?.role === 'guest' && (
                                 <li className="nav-item">
                                     <Link to="/corsiutente/1" className="nav-link text-secondary d-flex align-items-center gap-1"> <IoIosFitness />
-Your courses</Link>
+                                        Your courses</Link>
                                 </li>
                             )}
                         </ul>
 
-                     
+
 
                         {user ? (
                             <ul className="navbar-nav mb-2 mb-lg-0">
-                                <li className="nav-item dropdown">
+                               
 
+                               
+                                <li className="nav-item dropdown">
+                                    
+                                    <a className="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        
                                     <img
                                         src={user.profile_img}
                                         alt="profile_img"
                                         className="img_profile"
-                                    />
-                                </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {user.name}
+                                    />{user.name}
                                     </a>
                                     <ul className="dropdown-menu">
                                         <div className="d-flex px-2 align-items-center">
@@ -100,11 +101,11 @@ Your courses</Link>
                                         <li><hr className="dropdown-divider" /></li>
                                         <div className="d-flex px-2 align-items-center">
                                             {user.role === 'admin' && (
-                                           <>
-                                            <RiAdminFill />
-                                                <li>
-                                                    <Link className="dropdown-item border-0 ps-1 " to="backoffice">BackOffice</Link>
-                                                </li></>
+                                                <>
+                                                    <RiAdminFill />
+                                                    <li>
+                                                        <Link className="dropdown-item border-0 ps-1 " to="backoffice">BackOffice</Link>
+                                                    </li></>
                                             )}
                                         </div>
 
