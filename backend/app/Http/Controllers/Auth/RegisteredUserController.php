@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Storage;
 
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -23,7 +24,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()->min(4)],
             'profile_img' => ['nullable', 'image', 'max:1024'], // size in kilobytes
 
@@ -40,8 +41,8 @@ class RegisteredUserController extends Controller
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = $data['password'];
-        $user->role ='guest';
-        $user->profile_img = 'storage/' . $file_path;
+        $user->role = 'guest';
+        $user->profile_img = asset('storage/' . $file_path);
         $user->save();
 
 
@@ -78,7 +79,7 @@ class RegisteredUserController extends Controller
 
     public function edit($id)
     {
-       
+
     }
 
     public function Update($id)
@@ -87,7 +88,7 @@ class RegisteredUserController extends Controller
         if (!$user) {
             return response(['message' => 'Not found'], 404);
         }
-       
+
         return [
             'success' => true,
             'data' => $user
