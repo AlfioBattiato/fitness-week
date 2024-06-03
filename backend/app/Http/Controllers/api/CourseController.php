@@ -31,7 +31,25 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        //
+
+        $request->validate([
+            'activity_id' => 'required|exists:activities,id',
+            'slot_id' => 'required|exists:slots,id',
+            'location' => 'required|string|max:255',
+        ]);
+
+     // Creazione di una nuova istanza di Course
+        $course = new Course();
+        $course->activity_id = $request->activity_id;
+        $course->slot_id = $request->slot_id;
+        $course->location = $request->location;
+
+        // Salvataggio del corso nel database
+        $course->save();
+
+        // Restituzione della risposta JSON con il corso appena creato
+        return response()->json($course, 201);
+    
     }
 
     /**
