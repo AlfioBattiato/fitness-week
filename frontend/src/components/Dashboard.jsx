@@ -5,14 +5,30 @@ import axios from "axios";
 function Dashboard() {
   const user = useSelector((state) => state.user);
   const [email, setEmail] = useState(user.email);
+  const [display, setDisplay] = useState('none');
 
   const handleResetPassword = (event) => {
     axios.post("/forgot-password", { email });
+    setDisplay('block')
+  };
+  const resetName = (event) => {
+    axios.post("/forgot-password", { email });
+    setDisplay('block')
   };
 
   return (
     <>
-      <div className="pt-5">
+      <div className="container my-5 py-5">
+        <div className="alert alert-success my-3" style={{display:display}} role="alert">
+        A link for the reset of your password has been sent to your email. Check your inbox!
+        </div>
+
+
+
+
+
+
+        {/* //////////////////////////////////////////////////// */}
         <div className="row">
           <div className="col-12 col-md-6">
             <img src={user.profile_img} alt="profile_img" className="img_profile2" />
@@ -25,16 +41,17 @@ function Dashboard() {
                 </p>
               </div>
               <div className="col-6">
-                <p className="fw-bold text-primary">Change</p>
+                <p className="fw-bold text-primary change" 
+                onClick={resetName}>Change</p>
               </div>
               <hr />
               <div className="col-6">
                 <p className="fw-bold">
-                  Email: <span className="text-dark">{user.email}</span>
+                  Email: <span className="text-dark ">{user.email}</span>
                 </p>
               </div>
               <div className="col-6">
-                <p className="fw-bold text-primary">Change</p>
+                <p className="fw-bold text-primary change ">Change</p>
               </div>
               <hr />
               <div className="col-6">
@@ -43,9 +60,10 @@ function Dashboard() {
                 </p>
               </div>
               <div className="col-6">
-                <p className="fw-bold text-primary" onClick={handleResetPassword}>
+                <p className="fw-bold text-primary change" onClick={handleResetPassword}>
                   Change
                 </p>
+                <p className="text-success"></p>
               </div>
               <hr />
               <div className="col-6">

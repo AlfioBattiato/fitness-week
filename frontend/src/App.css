@@ -102,6 +102,9 @@ body {
 .text-purple{
     color: var(--purple)!important;
 }
+.change{
+    cursor: pointer;
+}
 @media screen and (max-width: 768px) {
     .header {
     

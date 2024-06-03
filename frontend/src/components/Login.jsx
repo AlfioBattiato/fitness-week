@@ -41,7 +41,7 @@ function Login() {
             })
             .catch((err) => {
                 console.log(err)
-                setError(err.response.data.message)
+                setError('so io',err.response.data.message)
                 setFormData({
                     email: '',
                     password: '',

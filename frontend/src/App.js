@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Backoffice from "./components/Backoffice";
 import Register from "./components/Register";
+import GuestRoutes from "./components/GuestRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import Detail from "./components/Detail";
 import axios from "axios";
@@ -44,15 +45,26 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/detail/:id" element={<Detail />} />
-            <Route path="/Login/" element={<Login />} />
-            <Route element={<ProtectedRoutes />}>
-              <Route path="/password-reset/:token" element={<PasswordReset />} />
-              <Route path="/corsiutente/:id" element={<CorsiUtente />} />
-              <Route path="/dashboard/:id" element={<Dashboard />} />
+
+
+
+            <Route element={<GuestRoutes />}>
+
+              <Route path="/Login/" element={<Login />} />
+              <Route path="/Register/" element={<Register />} />
+
+
             </Route>
 
-            <Route path="/Register/" element={<Register />} />
-            <Route path="/backoffice/" element={<Backoffice />} />
+            <Route element={<ProtectedRoutes />}>
+
+
+              <Route path="password-reset/:token" element={<PasswordReset />} />
+              <Route path="/corsiutente/:id" element={<CorsiUtente />} />
+              <Route path="/dashboard/" element={<Dashboard />} />
+              <Route path="/backoffice/" element={<Backoffice />} />
+            </Route>
+
 
             {/* {user=== null &&(
                 <Route path="/" element={<Login />} />

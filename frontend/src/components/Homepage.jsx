@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from './Header';
+import axios from 'axios';
 import Recensioni from './Recensioni';
 
 const Homepage = () => {
     const [courses, setCourses] = useState([]); // null buon candidato
     const navigate = useNavigate()
     useEffect(() => {
-        fetch('api/v1/courses')
-            .then((res) => res.json())
-            .then((data) => {
-                setCourses(data)
+        axios('api/v1/courses')
+            .then((res) => {
+                setCourses(res.data)
                 // console.log(data)
             }
             );
@@ -28,7 +28,7 @@ const Homepage = () => {
                         <div className="col-6 col-md-4 col-lg-3" key={course.id}>
                             <p className="card-title text-purple fw-semibold text-center">{course.activity.name}</p>
 
-                            <img src="https://plus.unsplash.com/premium_photo-1672352100479-b09df32e7ed0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Zml0bmVzc3xlbnwwfHwwfHx8MA%3D%3D"
+                            <img src={course.activity.activity_img}
                                 className=" shadow cursor" alt="img"
                                 style={{ width: "100%", height: "15rem", objectFit: "cover" }}
                                 onClick={() => navigate(`/detail/${course.id}`)} />
@@ -41,7 +41,7 @@ const Homepage = () => {
                                     <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5" />
                                 </svg>
 
-                                <p className="card-title text-dark fw-semibold fs-14 ">{course.activity.duration}.00 Min</p>
+                                {/* <p className="card-title text-dark fw-semibold fs-14 ">{course.activity.duration}.00 Min</p> */}
 
                             </div>
 

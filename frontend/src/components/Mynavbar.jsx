@@ -104,7 +104,7 @@ function Mynavbar() {
                     <div className="d-flex px-2 align-items-center">
                       <IoIosSettings />
                       <li>
-                        <Link className="dropdown-item border-0 ps-1  " to={`/dashboard/${user.id}`}>
+                        <Link className="dropdown-item border-0 ps-1  " to={`/dashboard/`}>
                           Profile
                         </Link>
                       </li>
